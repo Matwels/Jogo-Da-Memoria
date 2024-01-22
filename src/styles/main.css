@@ -1,0 +1,91 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #71f783;
+    user-select: none;/* para não deixa o usuário selecionar como texto */
+}
+
+.container{
+    position: relative; /* para poder manipular livremente depos */
+    display: flex; 
+    flex-direction: column; /* deixa o elemento em colunas */
+    justify-content: center;
+    align-items: center; /* alinhar ao centro */
+    gap: 30px; /* espaço entre os elementos */
+    background: linear-gradient(90deg, #f6f6f6 30%,#00d4ff 100%); /* efeito degradê no fundo */
+    padding: 40px 60px; /* aumenta o tamanho interno de elemento */
+}
+
+h2 {
+    font-size: 3em;
+    color: #3705b8;
+    text-transform: uppercase;
+    letter-spacing:  0.1em;
+}
+
+.reset {
+    padding: 15px 20px;
+    width: 100%; /* ocupa 100% do espaço no elemento em que ele está inserido */
+    border-radius: 20px;
+    border-color: #ffffff;
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer; /* adiciona o cursor pra mostrar que é clicável */
+    font-weight: 600;
+
+    
+}
+
+.reset:focus {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.game {
+    width: 430px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap; /* se um elemento ultrapassar o limite, pode haver quebra de linha. Precisa ter o DISPLAY: FLEX */
+    gap: 10px;
+    transform-style: preserve-3d; /* importante por ter animações em 3d no projeto */
+    perspective: 500px;
+    margin-bottom: 1rem;
+   
+}
+
+.item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ebebeb;
+    font-size: 3em;
+    transform: rotateY(180deg);
+    transition: 0.50s;
+} 
+
+.item::after{/* cria um pseudo elemento depois da classe item. Que vai fazer o "cobertura" das cartas do jogo */
+    content: "";
+    position: absolute;
+    inset: 0; /* seta o ponto zero, para sobrepor exatamente o elemento */
+    background: #404040;
+    /*opacity: 0.85;*/
+    transition: 0.50s;
+    transform: rotateY(0deg);
+    backface-visibility: hidden; /* esconde o que está na parte de tras durante a rotação */
+
+}
+
+.item.boxOpen {
+    transform: rotateY(0deg);/* rotaciona de volta pra posição 0 */
+}
+
+.boxOpen::after,
+.boxMatch::after{
+    transform: rotateY(180deg);/* rotaciona 180º as cartas selecionadas */
+}
